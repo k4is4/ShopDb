@@ -5,37 +5,26 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace ShopDb.Models
 {
-    public partial class SHOPDBContext : DbContext
+    public partial class ShopDbContext : DbContext
     {
-        public SHOPDBContext()
+        public ShopDbContext()
         {
         }
 
-        private IConfiguration _conf { get; set; }
-
-        public SHOPDBContext(DbContextOptions<SHOPDBContext> options, IConfiguration conf)
+        public ShopDbContext(DbContextOptions<ShopDbContext> options)
             : base(options)
         {
-            _conf = conf;
         }
 
         public virtual DbSet<Address> Addresses { get; set; } = null!;
         public virtual DbSet<Category> Categories { get; set; } = null!;
         public virtual DbSet<Order> Orders { get; set; } = null!;
         public virtual DbSet<OrderRow> OrderRows { get; set; } = null!;
-        public virtual DbSet<Product> Products { get; set; } = null!;
+        public virtual DbSet<Product> Product { get; set; } = null!;
         public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; } = null!;
         public virtual DbSet<ShoppingCartRow> ShoppingCartRows { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer(_conf["ConnectionStrings:ShopDb"]);
-            }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -131,9 +120,6 @@ namespace ShopDb.Models
 
             modelBuilder.Entity<ShoppingCart>(entity =>
             {
-                entity.HasKey(e => e.CartId)
-                    .HasName("PK__Shopping__51BCD7B778156440");
-
                 entity.ToTable("ShoppingCart");
 
                 entity.HasOne(d => d.User)

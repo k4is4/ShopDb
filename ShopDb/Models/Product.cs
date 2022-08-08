@@ -11,7 +11,7 @@ namespace ShopDb.Models
             ShoppingCartRows = new HashSet<ShoppingCartRow>();
         }
 
-        public int ProductId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
         public int? CategoryId { get; set; }

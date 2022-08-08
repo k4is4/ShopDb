@@ -5,7 +5,7 @@ namespace ShopDb.Models
 {
     public partial class ShoppingCartRow
     {
-        public int ShoppingCartRowId { get; set; }
+        public int Id { get; set; }
         public int ShoppingCartId { get; set; }
         public int ProductId { get; set; }
         public int Quantity { get; set; }

@@ -12,7 +12,7 @@ namespace ShopDb.Models
             ShoppingCarts = new HashSet<ShoppingCart>();
         }
 
-        public int UserId { get; set; }
+        public int Id { get; set; }
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
         public string? Phone { get; set; }
