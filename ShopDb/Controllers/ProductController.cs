@@ -29,8 +29,8 @@ namespace ShopDb.Controllers
         // GET: Product
         public async Task<IActionResult> Index()
         {
-            var shopDbContext2 = _context.Product.Include(p => p.Category);
-            return View(await shopDbContext2.ToListAsync());
+            var shopDbContext = _context.Product.Include(p => p.Category);
+            return View(await shopDbContext.ToListAsync());
         }
 
         // GET: Product/Details/5

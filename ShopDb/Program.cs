@@ -3,8 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using ShopDb.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-//builder.Services.AddDbContext<ShopDbContext>(options =>
-//    options.UseSqlServer(builder.Configuration.GetConnectionString("ShopDbContext") ?? throw new InvalidOperationException("Connection string 'ShopDbContext' not found.")));
+builder.Services.AddDbContext<ShopDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ShopDb") ?? throw new InvalidOperationException("Connection string 'ShopDb' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
