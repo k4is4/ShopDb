@@ -33,6 +33,12 @@ namespace ShopDb.Controllers
             return View(await shopDbContext.ToListAsync());
         }
 
+        public async Task<IActionResult> GetProductsByCategory(int id)
+        {
+            var shopDbContext = _context.Product.Include(p => p.Category).Where(i => i.Category.Id == id);
+            return View(await shopDbContext.ToListAsync());
+        }
+
         // GET: Product/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -51,6 +57,7 @@ namespace ShopDb.Controllers
 
             return View(product);
         }
+        
 
         // GET: Product/Create
         public IActionResult Create()
