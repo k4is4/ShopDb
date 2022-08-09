@@ -31,6 +31,19 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ShoppingCart">Ostoskori</a>
                         </li>
+                        @*tästä eteenpäin muokattu*@
+                      <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Tuotteet</a>
+                            <div class="dropdown-menu">
+                                @Html.ActionLink("Sohvat", "GetProductsByCategory","Product",new { id=1 }, new {@class="dropdown-item",})
+                                @Html.ActionLink("Pöydät", "GetProductsByCategory","Product",new { id=2 }, new {@class="dropdown-item",})
+                                @Html.ActionLink("Tuolit", "GetProductsByCategory","Product",new { id=3 }, new {@class="dropdown-item",})
+                                @Html.ActionLink("Sängyt", "GetProductsByCategory","Product",new { id=4 }, new {@class="dropdown-item",})
+                                @Html.ActionLink("Matot", "GetProductsByCategory","Product",new { id=5 }, new {@class="dropdown-item",})
+                                @Html.ActionLink("Valaisimet", "GetProductsByCategory","Product",new { id=6 }, new {@class="dropdown-item",})
+                                <div class="dropdown-divider"></div>
+                            </div>
+                        </li>
                     </ul>
 
                 </div>
