@@ -1,0 +1,44 @@
+﻿@model IEnumerable<ShopDb.Models.ShoppingCartRow>
+
+@{
+    ViewData["Title"] = "Ostoskori";
+}
+
+<h1>Ostoskori</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Tuote
+            </th>
+            <th>
+                Hinta
+            </th>
+            <th>
+                Lkm
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                <a asp-action="Details" asp-controller="Product" asp-route-id="@item.ProductId">Tuotteen tiedot</a> |
+                <a asp-action="DeleteFromCart" asp-route-id="@item.Id">Poista tuote korista</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
