@@ -63,7 +63,7 @@ namespace ShopDb.Controllers
             }
             _shopDb.SaveChanges();
 
-            return Content($"Lisätty tuote tiedoilla: userId {userId}, productId {productId}, cartId {cartId}, cartRow {cartRow}");
+            return RedirectToAction("Details", "Product", new {id = productId});
         }
 
         public IActionResult DeleteFromCart(int id, int quantity = 1)
@@ -80,7 +80,7 @@ namespace ShopDb.Controllers
             }
             _shopDb.SaveChanges();
 
-            return Content($"Poistettu tuote ostoskorista");
+            return RedirectToAction("ShoppingCart");
         }
 
         public IActionResult Privacy()
