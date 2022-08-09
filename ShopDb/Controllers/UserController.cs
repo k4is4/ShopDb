@@ -183,6 +183,19 @@ namespace ShopDb.Controllers
 
         public IActionResult Login(int Id)
         {
+            var id = (from i in _context.Users
+                     where i.Id == Id
+                     select i.Id).FirstOrDefault();
+            if (id == 0)
+            {
+                ViewBag.LoginFailedMessage = "Invalid user Id, please rety or create a new user";
+            }
+            else
+            {
+                ViewBag.LoginFailedMessage = "";
+            }
+            
+          
             HttpContext.Session.SetInt32("userId", Id);
             return View();
         }
