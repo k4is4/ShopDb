@@ -29,8 +29,8 @@ namespace ShopDb.Controllers
 
         public IActionResult ShoppingCart()
         {
-            //var userId = HttpContext.Session.GetInt32("UserId");
-            var userId = 2;
+            var userId = HttpContext.Session.GetInt32("userId");
+            //var userId = 2;
             var cartId = _shopDb.ShoppingCarts.Where(c => c.UserId == userId).Select(c => c.Id).FirstOrDefault();
             var cartRows = _shopDb.ShoppingCartRows.Include(c => c.Product).Where(x => x.ShoppingCartId == cartId);
             return View(cartRows.ToList());
@@ -39,7 +39,7 @@ namespace ShopDb.Controllers
 
         public IActionResult AddToCart(int productId, int quantity = 1)
         {
-            var userId = HttpContext.Session.GetInt32("UserId");
+            var userId = HttpContext.Session.GetInt32("userId");
             var cartId = _shopDb.ShoppingCarts.Where(c => c.UserId == userId).Select(c => c.Id).FirstOrDefault();
 
             if (cartId == 0)
