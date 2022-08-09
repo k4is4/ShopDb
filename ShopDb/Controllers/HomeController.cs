@@ -19,13 +19,41 @@ namespace ShopDb.Controllers
             var optionsBuilder = new DbContextOptionsBuilder<ShopDbContext>();
             optionsBuilder.UseSqlServer(_conf["ConnectionStrings:ShopDb"]);
             _shopDb = new ShopDbContext(optionsBuilder.Options);
-
         }
 
         public IActionResult Index()
         {
             HttpContext.Session.SetString("key", "value");
             return View();
+        }
+
+        public IActionResult AddToCart(int productId, int quantity = 1)
+        {
+            var userId = int.Parse(HttpContext.Session.GetString("UserId"));
+            var cartId = _shopDb.ShoppingCarts.Where(c => c.UserId == userId).Select(c => c.Id).FirstOrDefault();
+
+            if (cartId == 0)
+            {
+                var cart = new ShoppingCart() { UserId = userId };
+                _shopDb.ShoppingCarts.Add(cart);
+                _shopDb.SaveChanges();
+                cartId = cart.Id;
+            }
+
+            var cartRow = _shopDb.ShoppingCartRows.Where(r => r.ShoppingCartId == cartId && r.ProductId == productId).FirstOrDefault();
+
+            if (cartRow is null)
+            {
+                cartRow = new ShoppingCartRow() { ProductId = productId, ShoppingCartId = cartId, Quantity = quantity };
+                _shopDb.ShoppingCartRows.Add(cartRow);
+            }
+            else
+            {
+                cartRow.Quantity += quantity;
+            }
+            _shopDb.SaveChanges();
+
+            return Content($"Lisätty tuote tiedoilla: userId {userId}, productId {productId}, cartId {cartId}, cartRow {cartRow}");
         }
 
         public IActionResult Privacy()
