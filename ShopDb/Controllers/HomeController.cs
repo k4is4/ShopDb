@@ -37,7 +37,7 @@ namespace ShopDb.Controllers
         }
 
 
-        public IActionResult AddToCart(int productId, int quantity = 1)
+        public IActionResult AddToCart(int id, int quantity = 1)
         {
             var userId = HttpContext.Session.GetInt32("userId");
             var cartId = _shopDb.ShoppingCarts.Where(c => c.UserId == userId).Select(c => c.Id).FirstOrDefault();
@@ -50,11 +50,11 @@ namespace ShopDb.Controllers
                 cartId = cart.Id;
             }
 
-            var cartRow = _shopDb.ShoppingCartRows.Where(r => r.ShoppingCartId == cartId && r.ProductId == productId).FirstOrDefault();
+            var cartRow = _shopDb.ShoppingCartRows.Where(r => r.ShoppingCartId == cartId && r.ProductId == id).FirstOrDefault();
 
             if (cartRow is null)
             {
-                cartRow = new ShoppingCartRow() { ProductId = productId, ShoppingCartId = cartId, Quantity = quantity };
+                cartRow = new ShoppingCartRow() { ProductId = id, ShoppingCartId = cartId, Quantity = quantity };
                 _shopDb.ShoppingCartRows.Add(cartRow);
             }
             else
@@ -63,7 +63,7 @@ namespace ShopDb.Controllers
             }
             _shopDb.SaveChanges();
 
-            return Content($"Lisätty tuote tiedoilla: userId {userId}, productId {productId}, cartId {cartId}, cartRow {cartRow}");
+            return RedirectToAction("ShoppingCart");
         }
 
         public IActionResult DeleteFromCart(int id, int quantity = 1)
@@ -80,7 +80,7 @@ namespace ShopDb.Controllers
             }
             _shopDb.SaveChanges();
 
-            return Content($"Poistettu tuote ostoskorista");
+            return RedirectToAction("ShoppingCart");
         }
 
         public IActionResult Privacy()

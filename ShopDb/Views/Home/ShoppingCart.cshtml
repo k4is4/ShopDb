@@ -6,39 +6,53 @@
 
 <h1>Ostoskori</h1>
 
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Tuote
-            </th>
-            <th>
-                Hinta
-            </th>
-            <th>
-                Lkm
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                <a asp-action="Details" asp-controller="Product" asp-route-id="@item.ProductId">Tuotteen tiedot</a> |
-                <a asp-action="DeleteFromCart" asp-route-id="@item.Id">Poista tuote korista</a>
-            </td>
-        </tr>
+@{if (Model.Count() < 1)
+    {
+    <p>Ostoskori on tyhjä</p>
+    }
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Tuote
+                </th>
+                <th>
+                    Hinta
+                </th>
+                <th>
+                    Lkm
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Price) €
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-controller="Product" asp-route-id="@item.ProductId">Tuotteen tiedot</a> |
+                    <a asp-action="DeleteFromCart" asp-route-id="@item.Id">Poista tuote korista</a>
+                </td>
+            </tr>
 }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+    <div class="text-center">
+    Yhteensä: @Model.Sum(m => m.Product.Price * m.Quantity) €
+</div>
+<br/>
+<div class="text-center">
+@Html.ActionLink("Siirry maksamaan", "Index", "Home", null, new {@class="btn btn-primary"})
+</div>
+}
+}
