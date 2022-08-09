@@ -24,6 +24,7 @@ namespace ShopDb.Controllers
 
         public IActionResult Index()
         {
+            HttpContext.Session.SetString("key", "value");
             return View();
         }
 
