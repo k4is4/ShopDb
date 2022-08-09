@@ -1,0 +1,47 @@
+﻿@model ShopDb.Models.User
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>User</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="POST" asp-action="NewUser">
+            <div class="form-group">
+                <input type="text" name="firstName" class="form-control"   placeholder="First name">
+            </div>
+            <div class="form-group">
+                <input type="text" name="lastName" class="form-control"   placeholder="Last Name">
+            </div>
+            <div class="form-group">
+                <input type="text" name="phone" class="form-control"   placeholder="Phone number">
+            </div>
+            <div class="form-group">
+                <input type="email" name="email" class="form-control"   placeholder="email">
+            </div>
+            <div class="form-group">
+                <input type="text" name="address" class="form-control"   placeholder="Address">
+            </div>
+            <div class="form-group">
+                <input type="text" name="postalCode" class="form-control"  placeholder="PostalCode">
+            </div>
+            <div class="form-group">
+                <input type="text" name="city" class="form-control"  placeholder="City">
+            </div>
+            <div class="form-group">
+                <button type="submit button" class="btn btn-secondary">Create!</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+    

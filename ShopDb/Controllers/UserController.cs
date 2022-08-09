@@ -12,18 +12,22 @@ namespace ShopDb.Controllers
     public class UserController : Controller
     {
         private readonly ShopDbContext _context;
+        private readonly IConfiguration _conf;
 
-        public UserController(ShopDbContext context)
+        public UserController(ShopDbContext context, IConfiguration conf)
         {
-            _context = context;
+            _conf = conf;
+            var optionsBuilder = new DbContextOptionsBuilder<ShopDbContext>();
+            optionsBuilder.UseSqlServer(_conf["ConnectionStrings:ShopDb"]);
+            _context = new ShopDbContext(optionsBuilder.Options);
         }
 
         // GET: Users
         public async Task<IActionResult> Index()
         {
-              return _context.Users != null ? 
-                          View(await _context.Users.ToListAsync()) :
-                          Problem("Entity set 'ShopDbContext.Users'  is null.");
+            return _context.Users != null ?
+                        View(await _context.Users.ToListAsync()) :
+                        Problem("Entity set 'ShopDbContext.Users'  is null.");
         }
 
         // GET: Users/Details/5
@@ -50,21 +54,39 @@ namespace ShopDb.Controllers
             return View();
         }
 
-        // POST: Users/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Phone,Email")] User user)
+        [HttpGet]
+        public IActionResult NewUser()
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(user);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(user);
+            return View();
         }
+
+        [HttpPost]
+        public IActionResult NewUser(string firstName, string lastName, string phone, string email, string address, string postalCode, string city)
+        {
+                User user = new User()
+                {
+                    FirstName = firstName,
+                    LastName = lastName,
+                    Phone = phone,
+                    Email = email
+                };
+                _context.Users.Add(user);
+                _context.SaveChanges();
+                HttpContext.Session.SetInt32("userId", user.Id);
+
+                Address address1 = new Address()
+                {
+                    UserId = user.Id,
+                    Address1 = address,
+                    PostalCode = postalCode,
+                    City = city
+                };
+                _context.Addresses.Add(address1);
+                _context.SaveChanges();
+            
+            return View();
+        }
+
 
         // GET: Users/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -149,14 +171,14 @@ namespace ShopDb.Controllers
             {
                 _context.Users.Remove(user);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool UserExists(int id)
         {
-          return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
         public IActionResult Login(int Id)
