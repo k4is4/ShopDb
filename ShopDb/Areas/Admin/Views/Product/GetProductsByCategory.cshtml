@@ -1,15 +1,20 @@
 ﻿@model IEnumerable<ShopDb.Models.Product>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "GetProductsByCategory";
 }
 
 <h1>Tuotevalikoima</h1>
 
-
+<p>
+    <a asp-action="Create">Luo uusi</a>
+</p>
 <table class="table">
     <thead>
         <tr>
+            <th>
+               @Html.DisplayNameFor(model => model.Id)
+            </th>
             <th>
                 Nimi
             </th>
@@ -17,17 +22,18 @@
                 Tuotekuvaus
             </th>
             <th>
-                Hinta
+                Tuoteryhmä
+            </th>
+            <th>
+                Nimi
             </th>
             <th>
                 Varastossa
             </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.PictureUrl)
-            </th>*@
-            <th>
-                Tuoteryhmä
-            </th>
+           @* <th>*@
+                
+                @*@Html.DisplayNameFor(model => model.PictureUrl)*@
+            @*</th>*@
             <th></th>
         </tr>
     </thead>
@@ -35,10 +41,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Price)
@@ -50,10 +62,9 @@
                 @Html.DisplayFor(modelItem => item.PictureUrl)
             </td>*@
             <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </td>
-            <td>
+                 <a asp-action="Edit" asp-route-id="@item.Id">Muokkaa</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Tuotteen tiedot</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Poista</a>
             </td>
         </tr>
 }

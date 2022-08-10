@@ -194,6 +194,10 @@ namespace ShopDb.Controllers
             {
                 {
                     var obj = _context.Users.Where(a => a.Id.Equals(user.Id)).FirstOrDefault();
+
+                    if (obj.Id == 2)
+                    { return Redirect("/Admin/Product"); }
+
                     if (obj != null)
                     {
                         HttpContext.Session.SetInt32("userId", obj.Id);
@@ -217,6 +221,42 @@ namespace ShopDb.Controllers
             {
                 return RedirectToAction("Login");
             }
+        }
+
+      
+        //    public IActionResult Login(int Id)
+        //    {
+        //        var id = (from i in _context.Users
+        //                 where i.Id == Id
+        //                 select i.Id).FirstOrDefault();
+        //        if (id == 0)
+        //        {
+        //            ViewBag.LoginFailedMessage = "Invalid user Id, please rety or create a new user";
+        //        }
+        //        else
+        //        {
+        //            ViewBag.LoginFailedMessage = "";
+        //        }
+
+
+        //        HttpContext.Session.SetInt32("userId", Id);
+        //        return View();
+        //    }
+        //}
+
+        public IActionResult OrderHistory()
+        {
+            var userId = HttpContext.Session.GetInt32("userId");
+            var orders = _context.Orders.Where(o => o.UserId == userId).ToList();
+
+            return View(orders);
+        }
+
+        public IActionResult OrderDetails(int id)
+        {
+            var orderRows = _context.OrderRows.Include(o => o.Order).Include(p => p.Product).Where(r => r.OrderId == id).ToList();
+
+            return View(orderRows);
         }
     }
 }

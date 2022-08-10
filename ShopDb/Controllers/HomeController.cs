@@ -23,8 +23,9 @@ namespace ShopDb.Controllers
 
         public IActionResult Index()
         {
-            HttpContext.Session.SetString("key", "value");
-            return View();
+            var topProducts = GetTopProducts(4);
+
+            return View(topProducts);
         }
 
         public IActionResult ShoppingCart()
@@ -127,6 +128,32 @@ namespace ShopDb.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public List<Product> GetTopProducts(int quantity)
+        {
+            var topProductsDict = new Dictionary<int, int>();
+            var topProductsList = new List<Product>();
+
+            foreach (var item in _shopDb.OrderRows)
+            {
+                if (!topProductsDict.ContainsKey(item.ProductId))
+                {
+                    topProductsDict.Add(item.ProductId, item.Quantity);
+                }
+                else
+                {
+                    topProductsDict[item.ProductId] += item.Quantity;
+                }
+            }
+
+            foreach (var item in topProductsDict.OrderByDescending(p => p.Value))
+            {
+                var product = _shopDb.Product.Where(p => p.Id == item.Key).First();
+                topProductsList.Add(product);
+            }
+
+            return topProductsList.Take(quantity).ToList();
         }
     }
 }

@@ -6,7 +6,9 @@
 
 <h1>Tuotevalikoima</h1>
 
-
+<p>
+    <a asp-action="Create">Luo uusi</a>
+</p>
 <table class="table">
     <thead>
         <tr>
@@ -46,14 +48,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.PictureUrl)
-            </td>*@
             <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
+                @Html.DisplayFor(modelItem => item.PictureUrl)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Category.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Muokkaa</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Tuotteen tiedot</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Poista</a>
             </td>
         </tr>
 }
