@@ -1,0 +1,57 @@
+﻿@model ShopDb.Models.Product
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Poista</h1>
+
+<h3>Haluatko varmasti poistaa tuotteen?</h3>
+<div>
+    <h4>Tuote</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Nimi
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            Tuotekuvaus
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            Hinta
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class = "col-sm-2">
+            Varastossa
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+       @* <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PictureUrl)
+        </dt>*@
+        @*<dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PictureUrl)
+        </dd>*@
+        <dt class = "col-sm-2">
+            Tuoteryhmä
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Category.Id)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Poista" class="btn btn-danger" /> |
+        <a asp-action="Index">Takaisin</a>
+    </form>
+</div>
