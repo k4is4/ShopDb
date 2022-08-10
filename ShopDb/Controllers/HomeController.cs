@@ -30,7 +30,6 @@ namespace ShopDb.Controllers
         public IActionResult ShoppingCart()
         {
             var userId = HttpContext.Session.GetInt32("userId");
-            //var userId = 2;
             var cartId = _shopDb.ShoppingCarts.Where(c => c.UserId == userId).Select(c => c.Id).FirstOrDefault();
             var cartRows = _shopDb.ShoppingCartRows.Include(c => c.Product).Where(x => x.ShoppingCartId == cartId);
             return View(cartRows.ToList());
@@ -82,6 +81,42 @@ namespace ShopDb.Controllers
 
             return RedirectToAction("ShoppingCart");
         }
+
+        public IActionResult ConfirmOrder(int id, decimal total)
+        {
+            var cart = _shopDb.ShoppingCarts.Where(c => c.Id == id).FirstOrDefault();
+            var order = new Order()
+            {
+                UserId = (int)HttpContext.Session.GetInt32("userId"),
+                Date = DateTime.Today,
+                TotalPrice = total
+            };
+
+            _shopDb.Orders.Add(order);
+            _shopDb.SaveChanges();
+
+            var cartRows = _shopDb.ShoppingCartRows.Include(c => c.Product).Where(x => x.ShoppingCartId == id).ToList();
+
+            foreach (var item in cartRows)
+            {
+                var orderRow = new OrderRow()
+                {
+                    OrderId = order.Id,
+                    ProductId = item.ProductId,
+                    Quantity = item.Quantity,
+                    Price = item.Product.Price
+                };
+                _shopDb.OrderRows.Add(orderRow);
+                _shopDb.ShoppingCartRows.Remove(item);
+            }
+
+            _shopDb.SaveChanges();
+            _shopDb.ShoppingCarts.Remove(cart);
+            _shopDb.SaveChanges();
+
+            return View(cartRows);
+        }
+
 
         public IActionResult Privacy()
         {

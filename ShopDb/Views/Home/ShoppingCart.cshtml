@@ -52,7 +52,7 @@ else
 </div>
 <br/>
 <div class="text-center">
-@Html.ActionLink("Siirry maksamaan", "Index", "Home", null, new {@class="btn btn-primary"})
+@Html.ActionLink("Siirry maksamaan", "ConfirmOrder", "Home", new {id = Model.First().ShoppingCartId, total = Model.Sum(m => m.Product.Price * m.Quantity) }, new {@class="btn btn-primary"})
 </div>
 }
 }
