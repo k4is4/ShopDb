@@ -4,43 +4,44 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Tuotteen tiedot</h1>
-
-<div>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            Nimi
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            Kuvaus
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            Hinta
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Price) €
-        </dd>
-        <dt class = "col-sm-2">
-            Tuotteita varastossa
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Quantity)
-        <dt class = "col-sm-2">
-            Kategoria
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Category.Name)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="AddToCart" asp-controller="Home" asp-route-id="@Model?.Id">Lisää ostoskoriin</a> |
-    <a asp-action="Index">Kaikki tuotteet</a>
+<div class="p-4 bg-light bg-semitransparent">
+    <h1>Tuotteen tiedot</h1>
+    <div>
+        <hr />
+        <dl class="row">
+            <dt class = "col-sm-2">
+                Nimi
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt class = "col-sm-2">
+                Kuvaus
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt class = "col-sm-2">
+                Hinta
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Price) €
+            </dd>
+            <dt class = "col-sm-2">
+                Tuotteita varastossa
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Quantity)
+            <dt class = "col-sm-2">
+                Kategoria
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Category.Name)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="AddToCart" asp-controller="Home" asp-route-id="@Model?.Id">Lisää ostoskoriin</a> |
+        <a asp-action="Index">Kaikki tuotteet</a>
+    </div>
 </div>
