@@ -1,0 +1,38 @@
+﻿@using System.Globalization
+@model IEnumerable<ShopDb.Models.Order>
+
+@{
+    ViewData["Title"] = "OrderHistory";
+}
+
+<h1>Tilaukset</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Tilauspäivä
+            </th>
+            <th>
+                Summa
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @item.Date.ToString("dd.MM.yyyy")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice) €
+            </td>
+            <td>
+                <a asp-action="OrderDetails" asp-controller="User" asp-route-id="@item.Id">Tilauksen tiedot</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

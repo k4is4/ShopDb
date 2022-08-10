@@ -238,5 +238,20 @@ namespace ShopDb.Controllers
         //        return View();
         //    }
         //}
+
+        public IActionResult OrderHistory()
+        {
+            var userId = HttpContext.Session.GetInt32("userId");
+            var orders = _context.Orders.Where(o => o.UserId == userId).ToList();
+
+            return View(orders);
+        }
+
+        public IActionResult OrderDetails(int id)
+        {
+            var orderRows = _context.OrderRows.Include(o => o.Order).Include(p => p.Product).Where(r => r.OrderId == id).ToList();
+
+            return View(orderRows);
+        }
     }
 }

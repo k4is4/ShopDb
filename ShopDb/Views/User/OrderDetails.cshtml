@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ShopDb.Models.OrderRow>
+
+@{
+    ViewData["Title"] = "OrderDetails";
+}
+
+<h1>Tilauksen tiedot</h1>
+
+
+<div class="text-center">
+    <table class="table">
+        <tr>
+            <td>
+                Tilauspäivä:
+            </td>
+            <td>
+                @Model.First().Order.Date.ToString("dd.MM.yyyy")
+            </td>
+        </tr>
+                <tr>
+            <td>
+                Toimituspäivä:
+            </td>
+            <td>
+                @Model.First().Order.Date.AddDays(3).ToString("dd.MM.yyyy")
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Summa:
+            </td>
+            <td>
+                @Model.First().Order.TotalPrice €
+            </td>
+        </tr>
+    </table>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Tuote
+            </th>
+            <th>
+                Hinta
+            </th>
+            <th>
+                Lkm
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price) €
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<a asp-action="OrderHistory">Takaisin tilauksiin</a>
