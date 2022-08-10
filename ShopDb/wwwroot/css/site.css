@@ -50,3 +50,7 @@ body {
     font-size: 1.75rem;
     letter-spacing: 3px;
 }
+
+.bg-semitransparent {
+    --bs-bg-opacity: 0.85;
+}
