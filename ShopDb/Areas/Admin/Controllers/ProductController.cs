@@ -26,6 +26,19 @@ namespace ShopDb.Areas.Admin.Controllers
             return View(await shopDbContext.ToListAsync());
         }
 
+        public async Task<IActionResult> GetProductsByCategory(int id)
+        {
+            var shopDbContext = _context.Product.Include(p => p.Category).Where(i => i.Category.Id == id);
+            return View(await shopDbContext.ToListAsync());
+        }
+        [HttpPost]
+        public async Task<IActionResult> GetProductsByName(string name)
+        {
+            var search = name.ToLower().Trim();
+            var shopDbContext = _context.Product.Where(i => i.Name.ToLower().Contains(search)).Include(p => p.Category);
+            return View("GetProductsByCategory", await shopDbContext.ToListAsync());
+        }
+
         // GET: Admin/Product/Details/5
         public async Task<IActionResult> Details(int? id)
         {

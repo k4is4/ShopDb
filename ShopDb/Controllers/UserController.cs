@@ -194,6 +194,10 @@ namespace ShopDb.Controllers
             {
                 {
                     var obj = _context.Users.Where(a => a.Id.Equals(user.Id)).FirstOrDefault();
+
+                    if (obj.Id == 2)
+                    { return Redirect("/Admin/Product"); }
+
                     if (obj != null)
                     {
                         HttpContext.Session.SetInt32("userId", obj.Id);
@@ -219,6 +223,7 @@ namespace ShopDb.Controllers
             }
         }
 
+      
         //    public IActionResult Login(int Id)
         //    {
         //        var id = (from i in _context.Users
