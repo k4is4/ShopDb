@@ -63,27 +63,27 @@ namespace ShopDb.Controllers
         [HttpPost]
         public IActionResult NewUser(string firstName, string lastName, string phone, string email, string address, string postalCode, string city)
         {
-                User user = new User()
-                {
-                    FirstName = firstName,
-                    LastName = lastName,
-                    Phone = phone,
-                    Email = email
-                };
-                _context.Users.Add(user);
-                _context.SaveChanges();
-                HttpContext.Session.SetInt32("userId", user.Id);
+            User user = new User()
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                Phone = phone,
+                Email = email
+            };
+            _context.Users.Add(user);
+            _context.SaveChanges();
+            HttpContext.Session.SetInt32("userId", user.Id);
 
-                Address address1 = new Address()
-                {
-                    UserId = user.Id,
-                    Address1 = address,
-                    PostalCode = postalCode,
-                    City = city
-                };
-                _context.Addresses.Add(address1);
-                _context.SaveChanges();
-            
+            Address address1 = new Address()
+            {
+                UserId = user.Id,
+                Address1 = address,
+                PostalCode = postalCode,
+                City = city
+            };
+            _context.Addresses.Add(address1);
+            _context.SaveChanges();
+
             return View();
         }
 
@@ -181,23 +181,62 @@ namespace ShopDb.Controllers
             return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
-        public IActionResult Login(int Id)
+        public ActionResult Login()
         {
-            var id = (from i in _context.Users
-                     where i.Id == Id
-                     select i.Id).FirstOrDefault();
-            if (id == 0)
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(User user)
+        {
+            if (UserExists(user.Id))
             {
-                ViewBag.LoginFailedMessage = "Invalid user Id, please rety or create a new user";
+                {
+                    var obj = _context.Users.Where(a => a.Id.Equals(user.Id)).FirstOrDefault();
+                    if (obj != null)
+                    {
+                        HttpContext.Session.SetInt32("userId", obj.Id);
+                        HttpContext.Session.SetString("userName", obj.FirstName + " " + obj.LastName);
+                        return RedirectToAction("ProfilePage");
+                    }
+                }
+            }
+            ViewBag.LoginFailedMessage = "Invalid user Id, please rety or create a new user";
+            return View(user);
+        }
+
+        public IActionResult ProfilePage()
+        {
+            if (HttpContext.Session.GetInt32("userId") != null)
+            {
+                var user = _context.Users.Include(a => a.Addresses).Where(i => i.Id == HttpContext.Session.GetInt32("userId")).FirstOrDefault();
+                return View(user);
             }
             else
             {
-                ViewBag.LoginFailedMessage = "";
+                return RedirectToAction("Login");
             }
-            
-          
-            HttpContext.Session.SetInt32("userId", Id);
-            return View();
         }
+
+        //    public IActionResult Login(int Id)
+        //    {
+        //        var id = (from i in _context.Users
+        //                 where i.Id == Id
+        //                 select i.Id).FirstOrDefault();
+        //        if (id == 0)
+        //        {
+        //            ViewBag.LoginFailedMessage = "Invalid user Id, please rety or create a new user";
+        //        }
+        //        else
+        //        {
+        //            ViewBag.LoginFailedMessage = "";
+        //        }
+
+
+        //        HttpContext.Session.SetInt32("userId", Id);
+        //        return View();
+        //    }
+        //}
     }
 }

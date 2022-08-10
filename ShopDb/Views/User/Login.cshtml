@@ -1,16 +1,22 @@
-﻿
+﻿@model ShopDb.Models.User
 @{
 
 }
 <div class="container-sm">
 <h1>Login</h1>
-
+    
+@Html.AntiForgeryToken()
     <form class="form-horizontal" method="post" accept-charset="UTF-8">
                     <input class="form-control login" type="number" name="Id" placeholder="User ID"><br>
                     <input class="form-control login" type="password" name="password" placeholder="Password.."><br>
                     <input class="btn btn-primary" type="submit" name="submit" value="Login">  @Html.ActionLink("Create new Account", "NewUser", "User", null, new {@class="btn btn-secondary"})
                     
     </form>
-    <p>@ViewBag.LoginFailedMessage</p>
+    @if (@ViewBag.LoginFailedMessage != null)  
+{  
+  
+<p style="border: 1px solid red">@ViewBag.LoginFailedMessage</p>  
+  
+}  
     
 </div>
