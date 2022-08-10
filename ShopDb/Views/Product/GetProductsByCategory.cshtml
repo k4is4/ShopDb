@@ -6,9 +6,9 @@
 
 <h1>Tuotevalikoima</h1>
 
-<p>
+@*<p>
     <a asp-action="Create">Create New</a>
-</p>
+</p>*@
 <table class="table">
     <thead>
         <tr>
@@ -17,28 +17,23 @@
             </th>
             <th>
                 Nimi
-                @*@Html.DisplayNameFor(model => model.Name)*@
             </th>
             <th>
                 Tuotekuvaus
-                @*@Html.DisplayNameFor(model => model.Description)*@
             </th>
             <th>
                 Tuoteryhmä
-                @*@Html.DisplayNameFor(model => model.CategoryId)*@
             </th>
             <th>
                 Nimi
-                @*@Html.DisplayNameFor(model => model.Price)*@
             </th>
             <th>
-                Määrä
-                @*@Html.DisplayNameFor(model => model.Quantity)*@
+                Varastossa
             </th>
-            <th>
-                Kuva
+           @* <th>*@
+                
                 @*@Html.DisplayNameFor(model => model.PictureUrl)*@
-            </th>
+            @*</th>*@
             <th></th>
         </tr>
     </thead>
@@ -63,12 +58,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.PictureUrl)
-            </td>
+            </td>*@
             <td>
                 @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |*@
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                <a asp-action="Details" asp-controller="Product" asp-route-id="@item.Id">Tuotteen tiedot</a> |
+                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */}) |*@
                 @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
             </td>
         </tr>
