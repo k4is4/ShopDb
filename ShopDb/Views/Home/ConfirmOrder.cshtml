@@ -1,0 +1,61 @@
+﻿@using System.Globalization
+@model IEnumerable<ShopDb.Models.ShoppingCartRow>
+
+@{
+    ViewData["Title"] = "ConfirmOrder";
+}
+
+<h1>Maksu vahvistettu!</h1>
+
+<h2>Tilauksesi:</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Tuote
+            </th>
+            <th>
+                Hinta
+            </th>
+            <th>
+                Lkm
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Price) €
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+    <div class="text-center">
+        <table class="table">
+            <tr>
+                <td>
+                    Yhteensä:
+                </td>
+                <td>
+                    @Model.Sum(m => m.Product.Price * m.Quantity) €
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Toimitus:
+                </td>
+                <td>
+                    @DateTime.Today.AddDays(3).ToString("dd.MM.yyyy", CultureInfo.CreateSpecificCulture("fi-FI"))
+                </td>
+            </tr>
+    </table>
+</div>
