@@ -1,58 +1,84 @@
 ﻿<!DOCTYPE html>
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor
 <html lang="en">
 <head>
+    <br />
+    <br />
+    <br />
+    <br />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ShopDb</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ShopDb.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ShopDb</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top mask-custom shadow-0">
+            <div class="container">
+                <a class="navbar-brand" href="/"><span style="color: #5e9693;">Kaluste</span><span style="color: #fff;">.Net</span></a>
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                        data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ShoppingCart">Ostoskori</a>
-                        </li>
-                         <li class="nav-item dropdown">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Tuotteet</a>
                             <div class="dropdown-menu">
                                 @Html.ActionLink("Sohvat", "GetProductsByCategory","Product",new { id=1 }, new {@class="dropdown-item",})
-                                @Html.ActionLink("Pöydät", "GetProductsByCategory","Product",new { id=2 }, new {@class="dropdown-item",})
-                                @Html.ActionLink("Tuolit", "GetProductsByCategory","Product",new { id=3 }, new {@class="dropdown-item",})
-                                @Html.ActionLink("Sängyt", "GetProductsByCategory","Product",new { id=4 }, new {@class="dropdown-item",})
-                                @Html.ActionLink("Matot", "GetProductsByCategory","Product",new { id=5 }, new {@class="dropdown-item",})
-                                @Html.ActionLink("Valaisimet", "GetProductsByCategory","Product",new { id=6 }, new {@class="dropdown-item",})
                                 <div class="dropdown-divider"></div>
+                                @Html.ActionLink("Pöydät", "GetProductsByCategory","Product",new { id=2 }, new {@class="dropdown-item",})
+                                <div class="dropdown-divider"></div>
+                                @Html.ActionLink("Tuolit", "GetProductsByCategory","Product",new { id=3 }, new {@class="dropdown-item",})
+                                <div class="dropdown-divider"></div>
+                                @Html.ActionLink("Sängyt", "GetProductsByCategory","Product",new { id=4 }, new {@class="dropdown-item",})
+                                <div class="dropdown-divider"></div>
+                                @Html.ActionLink("Matot", "GetProductsByCategory","Product",new { id=5 }, new {@class="dropdown-item",})
+                                <div class="dropdown-divider"></div>
+                                @Html.ActionLink("Valaisimet", "GetProductsByCategory","Product",new { id=6 }, new {@class="dropdown-item",})
+
                             </div>
                         </li>
-                        <form method="post" class="d-flex" asp-action="GetProductsByName" asp-controller="Product">
-                            <input name=name class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-
                     </ul>
 
+                    <form method="post" class="d-flex form-inline my-2 my-lg-0" asp-action="GetProductsByName" asp-controller="Product">
+                        <input name=name class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+
+                    <ul class="navbar-nav ms-auto ">
+                        <li class="nav-item form-inline my-2 my-lg-0">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ShoppingCart">Ostoskori</a>
+                        </li>
+
+                        @{
+                            var id = HttpContextAccessor.HttpContext.Session.GetInt32("userId");
+                            var nimi = HttpContextAccessor.HttpContext.Session.GetString("userName");
+                        }
+                        @{if (id == null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Login</a>
+                            </li>
+                        }}
+                        @{else
+                        {
+                                <li class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">@nimi</a>
+                                    <div class="dropdown-menu">
+                                        @Html.ActionLink("Profiili", "ProfilePage","User",null, new {@class="dropdown-item",})
+                                    </div>
+                                </li>
+                        }}
+                    </ul>
                 </div>
             </div>
         </nav>
+
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -61,9 +87,6 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - ShopDb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
