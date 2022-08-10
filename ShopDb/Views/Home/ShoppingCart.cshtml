@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Ostoskori";
 }
-
+<div class="p-4 bg-light bg-semitransparent">
 <h1>Ostoskori</h1>
 
 @{if (Model.Count() < 1)
@@ -52,7 +52,8 @@ else
 </div>
 <br/>
 <div class="text-center">
-@Html.ActionLink("Siirry maksamaan", "ConfirmOrder", "Home", new {id = Model.First().ShoppingCartId, total = Model.Sum(m => m.Product.Price * m.Quantity) }, new {@class="btn btn-primary"})
+@Html.ActionLink("Siirry maksamaan", "ConfirmOrder", "Home", new {id = Model.First().ShoppingCartId, total = Model.Sum(m => m.Product.Price * m.Quantity) }, new {@class="btn btn-secondary"})
 </div>
 }
 }
+</div>

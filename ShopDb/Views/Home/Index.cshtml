@@ -16,7 +16,7 @@
         {
           <div class="col-lg-3 col-md-4 mb-4">
             <div class="card">
-              <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+              <div class="p-4 bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                 <img src="@(item.PictureUrl!=null ? item.PictureUrl : "https://mdbootstrap.com/img/new/standard/nature/184.jpg")" class="img-fluid" />
                 <a href="#!">
                   <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
@@ -27,7 +27,7 @@
                 <p class="card-text">
                   @item.Price €
                 </p>
-                <a href="/Product/Details/@item.Id" class="btn btn-primary">Tuotteen tiedot</a>
+                <a href="/Product/Details/@item.Id" class="btn btn-secondary">Tuotteen tiedot</a>
               </div>
             </div>
           </div>
