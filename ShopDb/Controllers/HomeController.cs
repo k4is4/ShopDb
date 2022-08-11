@@ -36,7 +36,6 @@ namespace ShopDb.Controllers
             return View(cartRows.ToList());
         }
 
-
         public IActionResult AddToCart(int id, int quantity = 1)
         {
             var userId = HttpContext.Session.GetInt32("userId");
@@ -119,7 +118,6 @@ namespace ShopDb.Controllers
 
             return View(cartRows);
         }
-
 
         public IActionResult Privacy()
         {

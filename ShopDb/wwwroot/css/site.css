@@ -61,6 +61,12 @@ body {
     float: right;
 }
 
+#admin-page-photo {
+    max-width: 30%;
+    height: auto;
+    float: initial;
+}
+
 .imagesquare {
     flex: 1 1 100%;
     display: flex;

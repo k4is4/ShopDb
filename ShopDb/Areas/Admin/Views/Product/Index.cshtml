@@ -4,63 +4,62 @@
     ViewData["Title"] = "Index";
 }
 <div class="p-4 bg-light bg-semitransparent">
-<h1>Tuotevalikoima</h1>
-<br />
-<p>
-    <a class="btn btn-secondary btn-sm" asp-action="Create">Luo uusi</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Nimi
-            </th>
-            <th>
-                Tuotekuvaus
-            </th>
-            <th>
-                Hinta
-            </th>
-            <th>
-                Varastossa
-            </th>
-            <th>
-                Kuvan url
-            </th>
-            <th>
-                Tuoteryhmä
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PictureUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Id)
-            </td>
-            <td>
-                <a class="btn btn-outline-secondary btn-sm" asp-action="Edit" asp-route-id="@item.Id">Muokkaa</a> 
-                <a class="btn btn-outline-secondary btn-sm" asp-action="Details" asp-route-id="@item.Id">Tiedot</a>
-                <a class="btn btn-outline-secondary btn-sm" asp-action="Delete" asp-route-id="@item.Id">Poista</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <h1>Tuotevalikoima</h1>
+    <br />
+    <p>
+        <a class="btn btn-secondary btn-sm" asp-action="Create">Lisää uusi tuote</a>
+    </p>
+    <table class="table w-auto">
+        <thead>
+            <tr>
+                <th>
+                    Nimi
+                </th>
+                <th>
+                    Tuotekuvaus
+                </th>
+                <th>
+                    Hinta    
+                </th>
+                <th>
+                    Varastossa
+                </th>
+                <th>
+                    Tuoteryhmä
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td class="text-nowrap">
+                        @Html.DisplayFor(modelItem => item.Price) €
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity) kpl
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.Id)
+                    </td>
+                    <td class="th-sm">
+                        <img src="@(item.PictureUrl !=null ? item.PictureUrl :"https://mdbootstrap.com/img/new/standard/nature/184.jpg")" alt="..." id="admin-page-photo">
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-secondary btn-sm" asp-action="Edit" asp-route-id="@item.Id">Muokkaa</a>
+                        <a class="btn btn-outline-secondary btn-sm" asp-action="Details" asp-route-id="@item.Id">Tiedot</a>
+                        <a class="btn btn-outline-secondary btn-sm" asp-action="Delete" asp-route-id="@item.Id">Poista</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
