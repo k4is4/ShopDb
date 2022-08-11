@@ -68,6 +68,12 @@ namespace ShopDb.Controllers
                 return NotFound();
             }
 
+            var userId = HttpContext.Session.GetInt32("userId");
+            var like = _context.Likes
+                .Where(a => a.UserId.Equals(userId) && a.ProductId.Equals(id))
+                .FirstOrDefault();
+
+            product.Like = like;
             return View(product);
         }
 
