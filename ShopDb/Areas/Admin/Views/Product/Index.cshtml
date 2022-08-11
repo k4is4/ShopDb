@@ -5,9 +5,9 @@
 }
 <div class="p-4 bg-light bg-semitransparent">
 <h1>Tuotevalikoima</h1>
-
+<br />
 <p>
-    <a asp-action="Create">Luo uusi</a>
+    <a class="btn btn-secondary btn-sm" asp-action="Create">Luo uusi</a>
 </p>
 <table class="table">
     <thead>
@@ -25,7 +25,7 @@
                 Varastossa
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PictureUrl)
+                Kuvan url
             </th>
             <th>
                 Tuoteryhmä
@@ -55,9 +55,9 @@
                 @Html.DisplayFor(modelItem => item.Category.Id)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Muokkaa</a> 
-                <a asp-action="Details" asp-route-id="@item.Id">Tiedot</a>
-                <a asp-action="Delete" asp-route-id="@item.Id">Poista</a>
+                <a class="btn btn-outline-secondary btn-sm" asp-action="Edit" asp-route-id="@item.Id">Muokkaa</a> 
+                <a class="btn btn-outline-secondary btn-sm" asp-action="Details" asp-route-id="@item.Id">Tiedot</a>
+                <a class="btn btn-outline-secondary btn-sm" asp-action="Delete" asp-route-id="@item.Id">Poista</a>
             </td>
         </tr>
 }
