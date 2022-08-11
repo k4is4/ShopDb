@@ -41,8 +41,16 @@ namespace ShopDb.Controllers
         [HttpPost]
         public async Task<IActionResult> GetProductsByName(string name)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var search = name.ToLower().Trim();
             var shopDbContext = _context.Product.Where(i => i.Name.ToLower().Contains(search)).Include(p => p.Category);
+            if (shopDbContext.ToList().Count() == 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View("GetProductsByCategory", await shopDbContext.ToListAsync());
         }
 
