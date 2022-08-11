@@ -29,6 +29,8 @@
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Tuotteet</a>
                             <div class="dropdown-menu">
+                                @Html.ActionLink("Kaikki tuotteet", "Index","Product", null, new {@class="dropdown-item",})
+                                <div class="dropdown-divider"></div>
                                 @Html.ActionLink("Sohvat", "GetProductsByCategory","Product",new { id=1 }, new {@class="dropdown-item",})
                                 <div class="dropdown-divider"></div>
                                 @Html.ActionLink("Pöydät", "GetProductsByCategory","Product",new { id=2 }, new {@class="dropdown-item",})
@@ -51,29 +53,34 @@
                     </form>
 
                     <ul class="navbar-nav ms-auto ">
-                        <li class="nav-item form-inline my-2 my-lg-0">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ShoppingCart">Ostoskori</a>
-                        </li>
-
                         @{
                             var id = HttpContextAccessor.HttpContext.Session.GetInt32("userId");
                             var nimi = HttpContextAccessor.HttpContext.Session.GetString("userName");
                         }
-                        @{if (id == null)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Login</a>
-                            </li>
-                        }}
-                        @{else
-                        {
+                        @{
+                            if (id == null)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Login">Login</a>
+                                </li>
+                            }
+                        }
+                        @{
+                            else
+                            {
+                                <li class="nav-item form-inline my-2 my-lg-0">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ShoppingCart">Ostoskori</a>
+                                </li>
                                 <li class="nav-item dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">@nimi</a>
                                     <div class="dropdown-menu">
-                                        @Html.ActionLink("Profiili", "ProfilePage","User",null, new {@class="dropdown-item",})
+                                        @Html.ActionLink("Profiili", "ProfilePage", "User", null, new {@class="dropdown-item",})
+                                        <div class="dropdown-divider"></div>
+                                        @Html.ActionLink("Tilaukset", "OrderHistory", "User", null, new {@class="dropdown-item",})
                                     </div>
                                 </li>
-                        }}
+                            }
+                        }
                     </ul>
                 </div>
             </div>
