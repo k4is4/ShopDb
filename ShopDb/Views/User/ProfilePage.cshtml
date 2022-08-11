@@ -4,29 +4,29 @@
 }
 
 
-<div class="container rounded bg-white mt-5 mb-5">
-    <div class="row">
-        <div class="col-md-5 border-right">
+<div class="container rounded bg-white bg-semitransparent mt-5 mb-5">
+    
+        <form method="POST" asp-action="UpdateProfile">
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Profiilin asetukset</h4>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-md-6"><label class="labels">Etunimi</label><input type="text" class="form-control" placeholder="@Model.FirstName" value=""></div>
-                    <div class="col-md-6"><label class="labels">Sukunimi</label><input type="text" class="form-control" value="" placeholder="@Model.LastName"></div>
+                    <div class="col-md-6"><label class="labels">Etunimi</label><input name="firstName" type="text" class="form-control" placeholder="@Model.FirstName" value="@Model.FirstName"></div>
+                    <div class="col-md-6"><label class="labels">Sukunimi</label><input name="lastName" type="text" class="form-control" value="@Model.LastName" placeholder="@Model.LastName"></div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Puhelinnumero</label><input type="text" class="form-control" placeholder="@Model.Phone" value=""></div>
-                    <div class="col-md-12"><label class="labels">Sähköposti</label><input type="text" class="form-control" placeholder="@Model.Email" value=""></div>
-                    <div class="col-md-12"><label class="labels">Osoite</label><input type="text" class="form-control" placeholder="@Model.Addresses.FirstOrDefault().Address1" value=""></div>
-                    <div class="col-md-12"><label class="labels">Postinumero</label><input type="text" class="form-control" placeholder="@Model.Addresses.FirstOrDefault().PostalCode" value=""></div>
-                    <div class="col-md-12"><label class="labels">Kaupunki</label><input type="text" class="form-control" placeholder="@Model.Addresses.FirstOrDefault().City" value=""></div>
+                    <div class="col-md-12"><label class="labels">Puhelinnumero</label><input name="phone" type="text" class="form-control" placeholder="@Model.Phone" value="@Model.Phone"></div>
+                    <div class="col-md-12"><label class="labels">Sähköposti</label><input name="email" type="text" class="form-control" placeholder="@Model.Email" value="@Model.Email"></div>
+                    <div class="col-md-12"><label class="labels">Osoite</label><input name="address" type="text" class="form-control" placeholder="@Model.Addresses.FirstOrDefault().Address1" value="@Model.Addresses.FirstOrDefault().Address1"></div>
+                    <div class="col-md-12"><label class="labels">Postinumero</label><input name="postalCode" type="text" class="form-control" placeholder="@Model.Addresses.FirstOrDefault().PostalCode" value="@Model.Addresses.FirstOrDefault().PostalCode"></div>
+                    <div class="col-md-12"><label class="labels">Kaupunki</label><input name="city" type="text" class="form-control" placeholder="@Model.Addresses.FirstOrDefault().City" value="@Model.Addresses.FirstOrDefault().City"></div>
                 </div>
                 <div class="row mt-3">
                 </div>
-                <div class="mt-5 text-center"><button class="btn btn-secondary profile-button" type="button">Tallenna muutokset!</button></div>
+                <div class="mt-5 text-center"><button class="btn btn-secondary profile-button" type="submit button">Tallenna muutokset!</button></div>
             </div>
-        </div>
-    </div>
+        </form>
+    
 </div>
    
