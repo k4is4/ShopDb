@@ -127,7 +127,6 @@ namespace ShopDb.Controllers
             return View("ProfilePage", user);
         }
 
-
         public IActionResult OrderHistory()
         {
             var userId = HttpContext.Session.GetInt32("userId");
