@@ -3,12 +3,15 @@
 @{
     ViewData["Title"] = "GetProductsByCategory";
 }
-
+<div class="p-4 bg-light bg-semitransparent">
 <h1>Tuotevalikoima</h1>
-
+<br />
 <p>
-    <a asp-action="Create">Luo uusi</a>
+    <a class="btn btn-secondary btn-sm" asp-action="Create">Luo uusi</a>
+    <a class="btn btn-secondary btn-sm" asp-action="Index">Kaikki tuotteet</a>
 </p>
+<br />
+<div class="p-4 bg-light bg-semitransparent">
 <table class="table">
     <thead>
         <tr>
@@ -30,10 +33,9 @@
             <th>
                 Varastossa
             </th>
-           @* <th>*@
-                
-                @*@Html.DisplayNameFor(model => model.PictureUrl)*@
-            @*</th>*@
+           <th>
+                Kuvan url
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -58,15 +60,17 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.PictureUrl)
-            </td>*@
             <td>
-                 <a asp-action="Edit" asp-route-id="@item.Id">Muokkaa</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Tuotteen tiedot</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Poista</a>
+                @Html.DisplayFor(modelItem => item.PictureUrl)
+            </td>
+            <td>
+                 <a class="btn btn-outline-secondary btn-sm" asp-action="Edit" asp-route-id="@item.Id">Muokkaa</a> 
+                <a class="btn btn-outline-secondary btn-sm" asp-action="Details" asp-route-id="@item.Id">Tiedot</a> 
+                <a class="btn btn-outline-secondary btn-sm" asp-action="Delete" asp-route-id="@item.Id">Poista</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+</div>
+</div>
