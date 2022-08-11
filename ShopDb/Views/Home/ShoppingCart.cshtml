@@ -40,8 +40,8 @@ else
                     @Html.DisplayFor(modelItem => item.Quantity)
                 </td>
                 <td>
-                    <a asp-action="Details" asp-controller="Product" asp-route-id="@item.ProductId">Tuotteen tiedot</a> |
-                    <a asp-action="DeleteFromCart" asp-route-id="@item.Id">Poista tuote korista</a>
+                    @Html.ActionLink("Tuotteen tiedot", "Details", "Product", new {id = item.ProductId}, new {@class="btn btn-light"})
+                    @Html.ActionLink("Poista tuote korista", "DeleteFromCart", "Home", new {item.ProductId}, new {@class="btn btn-light"})
                 </td>
             </tr>
 }

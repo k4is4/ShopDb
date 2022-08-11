@@ -100,6 +100,8 @@ namespace ShopDb.Controllers
 
             foreach (var item in cartRows)
             {
+                item.Product.Quantity -= item.Quantity;
+
                 var orderRow = new OrderRow()
                 {
                     OrderId = order.Id,
