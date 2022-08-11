@@ -239,6 +239,10 @@ namespace ShopDb.Controllers
             user.Addresses.FirstOrDefault().PostalCode = postalCode;
             user.Addresses.FirstOrDefault().City = city;
 
+            if (!Models.Utils.UserValidator(user, HttpContext))
+            {
+                return View("ProfilePage", user);
+            }
             _context.Update(user);
             _context.SaveChanges();
 

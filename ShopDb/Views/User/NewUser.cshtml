@@ -1,4 +1,5 @@
 ﻿@model ShopDb.Models.User
+@inject IHttpContextAccessor HttpContextAccessor
 
 @{
     ViewData["Title"] = "Create";
@@ -35,6 +36,7 @@
             <div class="form-group m-3">
                 <button type="submit button" class="btn btn-secondary">Luo käyttäjä</button>
             </div>
+            <div class="form-group m-3" style="color:red">@HttpContextAccessor.HttpContext.Session.GetString("UserValidator") </div>
         </form>
     </div>
 </div>

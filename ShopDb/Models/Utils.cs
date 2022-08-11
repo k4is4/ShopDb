@@ -55,6 +55,7 @@
                 return false;
             }
             else
+                httpContext.Session.SetString("UserValidator", "");
                 return true;
         }
 
