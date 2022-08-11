@@ -61,6 +61,12 @@ body {
     float: right;
 }
 
+#admin-page-photo {
+    max-width: 30%;
+    height: auto;
+    float: initial;
+}
+
 .imagesquare {
     height: 0;
     padding-bottom: 100%;
