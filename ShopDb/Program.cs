@@ -49,8 +49,9 @@ app.UseEndpoints(endpoints =>
     );
 });
 
+//product name used in the URL for search engine optimization
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}/{name?}");
 
 app.Run();
