@@ -29,6 +29,7 @@ namespace ShopDb.Controllers
         // GET: Product
         public async Task<IActionResult> Index()
         {
+            ViewBag.Header = "Kaikki tuotteet";
             var allProducts = _context.Product.Include(p => p.Category);
             return View(await allProducts.ToListAsync());
         }
@@ -36,11 +37,13 @@ namespace ShopDb.Controllers
         public async Task<IActionResult> GetProductsByCategory(int id)
         {
             var products = _context.Product.Include(p => p.Category).Where(i => i.Category.Id == id);
-            return View(await products.ToListAsync());
+            ViewBag.Header = products.First().Category.Name;
+            return View("Index", await products.ToListAsync());
         }
         [HttpPost]
         public async Task<IActionResult> GetProductsByName(string name)
         {
+
             if (string.IsNullOrEmpty(name))
             {
                 return RedirectToAction("Index", "Home");
@@ -51,7 +54,8 @@ namespace ShopDb.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            return View("GetProductsByCategory", await shopDbContext.ToListAsync());
+            ViewBag.Header = $"Haun \"{name}\" tulokset, {shopDbContext.ToList().Count().ToString()} kpl";
+            return View("Index", await shopDbContext.ToListAsync());
         }
 
         // GET: Product/Details/5
