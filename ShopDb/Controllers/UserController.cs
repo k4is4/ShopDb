@@ -206,7 +206,7 @@ namespace ShopDb.Controllers
                     {
                         HttpContext.Session.SetInt32("userId", obj.Id);
                         HttpContext.Session.SetString("userName", obj.FirstName + " " + obj.LastName);
-                        return RedirectToAction("ProfilePage");
+                        return RedirectToAction("Index", "Home");
                     }
                 }
             }
