@@ -62,12 +62,19 @@ body {
 }
 
 .imagesquare {
-    height: 0;
-    padding-bottom: 100%;
+    flex: 1 1 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    height: 100%;
 }
 
 .card-body{
     padding: 0;
     padding-bottom: 1rem;
+    flex: none;
 }
 
