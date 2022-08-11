@@ -5,7 +5,7 @@
 }
 
 <div class="p-4 bg-light bg-semitransparent">
-    <h1>Tuotteen tiedot</h1>
+    <h1 class="navbar-brand" style="color: #5e9693;">Tuotteen tiedot</h1>
     <div>
         <hr />
         <dl class="row">
@@ -31,7 +31,7 @@
                 Tuotteita varastossa
             </dt>
             <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.Quantity)
+                @Html.DisplayFor(model => model.Quantity) kpl
             <dt class = "col-sm-2">
                 Kategoria
             </dt>
@@ -44,7 +44,14 @@
         </dl>
     </div>
     <div>
-        <a class="btn btn-secondary" asp-action="AddToCart" asp-controller="Home" asp-route-id="@Model?.Id">Lisää ostoskoriin</a> 
+        @if (@Model.Quantity > 0)
+        {
+            <a class="btn btn-secondary" asp-action="AddToCart" asp-controller="Home" asp-route-id="@Model?.Id">Lisää ostoskoriin</a>
+        }
+        else
+        {
+            <button type="button" class="btn btn-secondary" disabled>Tuote ei saatavilla</button>
+        }
         <a class="btn btn-light" asp-action="Index">Kaikki tuotteet</a>
     </div>
 </div>
