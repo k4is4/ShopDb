@@ -61,3 +61,13 @@ body {
     float: right;
 }
 
+.imagesquare {
+    height: 0;
+    padding-bottom: 100%;
+}
+
+.card-body{
+    padding: 0;
+    padding-bottom: 1rem;
+}
+
