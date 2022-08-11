@@ -264,5 +264,11 @@ namespace ShopDb.Controllers
 
             return View(orderRows);
         }
+
+        public IActionResult LogOut()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

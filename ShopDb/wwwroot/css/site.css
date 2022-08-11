@@ -54,3 +54,10 @@ body {
 .bg-semitransparent {
     --bs-bg-opacity: 0.85;
 }
+
+.img-fluid {
+    max-width: 30%;
+    height: auto;
+    float: right;
+}
+
