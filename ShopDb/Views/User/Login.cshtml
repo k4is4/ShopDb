@@ -2,16 +2,20 @@
 @{
 
 }
-<div class="container-sm">
-<h1>Login</h1>
+
+<div class="container-sm container rounded bg-white bg-semitransparent mt-5 mb-auto text-center" style="padding: 2vw">
+
+<h1 class="navbar-brand" style="color: #5e9693;">Kirjaudu sisään</h1>
     
 @Html.AntiForgeryToken()
     <form class="form-horizontal" method="post" accept-charset="UTF-8">
-                    <input class="form-control login" type="number" name="Id" placeholder="User ID"><br>
-                    <input class="form-control login" type="password" name="password" placeholder="Password.."><br>
-                    <input class="btn btn-primary" type="submit" name="submit" value="Login">  @Html.ActionLink("Create new Account", "NewUser", "User", null, new {@class="btn btn-secondary"})
+                    <input class="form-control login" type="number" name="Id" placeholder="Käyttäjä ID"><br>
+                    <input class="form-control login" type="password" name="password" placeholder="Salasana"><br>
+                    <input class="btn btn-secondary" type="submit" name="submit" value="Kirjaudu">
+                    @Html.ActionLink("Luo uusi käyttäjä", "NewUser", "User", null, new {@class="btn btn-secondary"})
                     
     </form>
+
     @if (@ViewBag.LoginFailedMessage != null)  
 {  
   
