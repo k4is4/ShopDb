@@ -55,7 +55,7 @@ body {
     --bs-bg-opacity: 0.85;
 }
 
-.img-fluid {
+#tuotteentiedot {
     max-width: 30%;
     height: auto;
     float: right;
