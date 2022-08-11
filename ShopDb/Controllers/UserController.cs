@@ -223,7 +223,24 @@ namespace ShopDb.Controllers
             }
         }
 
-      
+        [HttpPost]
+        public IActionResult UpdateProfile(string firstName, string lastName, string phone, string email, string address, string postalCode, string city)
+        {
+            User user = _context.Users.Include(a => a.Addresses).Where(i => i.Id.Equals(HttpContext.Session.GetInt32("userId"))).FirstOrDefault();
+            user.FirstName = firstName;
+            user.LastName = lastName;
+            user.Phone = phone;
+            user.Email = email;
+            user.Addresses.FirstOrDefault().Address1 = address;
+            user.Addresses.FirstOrDefault().PostalCode = postalCode;
+            user.Addresses.FirstOrDefault().City = city;
+
+            _context.Update(user);
+            _context.SaveChanges();
+
+            return View("ProfilePage", user);
+        }
+
 
         public IActionResult OrderHistory()
         {
