@@ -16,16 +16,17 @@
 <body>
     <header>
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top mask-custom shadow-0">
+        <nav class="navbar navbar-expand-lg navbar-toggleable-sm navbar-light fixed-top mask-custom shadow-0">
             <div class="container">
                 <a class="navbar-brand" href="/"><span style="color: #5e9693;">Kaluste</span><span style="color: #fff;">.Net</span></a>
-                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-                        data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false"
                         aria-label="Toggle navigation">
-                    <i class="fas fa-bars"></i>
+                        <span class="navbar-toggler-icon"></span>
+                    @*<i class="fas fa-bars"></i>*@
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto">
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between" id="navbarSupportedContent">
+                    <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Tuotteet</a>
                             <div class="dropdown-menu">
@@ -47,9 +48,9 @@
                         </li>
                     </ul>
 
-                    <form method="post" class="d-flex form-inline my-2 my-lg-0" asp-action="GetProductsByName" asp-controller="Product">
-                        <input name=name class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    <form method="post" class="d-flex" asp-action="GetProductsByName" asp-controller="Product">
+                        <input name=name class="form-control me-2" type="search" placeholder="Etsi tuotetta.." aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Hae</button>
                     </form>
 
                     <ul class="navbar-nav ms-auto ">
