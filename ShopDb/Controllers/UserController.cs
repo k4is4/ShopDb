@@ -35,7 +35,7 @@ namespace ShopDb.Controllers
             };
             _context.Users.Add(user);
 
-            HttpContext.Session.SetInt32("userId", user.Id);
+            
             HttpContext.Session.SetString("userName", user.FirstName + " " + user.LastName);
 
             Address address1 = new Address()
@@ -54,6 +54,7 @@ namespace ShopDb.Controllers
             }
             
             _context.SaveChanges();
+            HttpContext.Session.SetInt32("userId", user.Id);
 
             return RedirectToAction("Index", "Home");
         }
