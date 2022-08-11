@@ -5,7 +5,9 @@
     ViewData["Title"] = "OrderHistory";
 }
 
-<h1>Tilaukset</h1>
+<div class="container-sm container rounded bg-white bg-semitransparent mt-5 mb-auto text-center" style="padding: 2vw">
+
+    <h1 class="navbar-brand" style="color: #5e9693;">Tilaukset</h1>
 
 
 <table class="table">
@@ -30,9 +32,10 @@
                 @Html.DisplayFor(modelItem => item.TotalPrice) €
             </td>
             <td>
-                <a asp-action="OrderDetails" asp-controller="User" asp-route-id="@item.Id">Tilauksen tiedot</a>
+                @Html.ActionLink("Tilauksen tiedot", "OrderDetails", "User", new {id = item.Id}, new {@class="btn btn-secondary"})
             </td>
         </tr>
 }
     </tbody>
 </table>
+</div>

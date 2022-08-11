@@ -1,4 +1,5 @@
 ﻿@model ShopDb.Models.User
+@inject IHttpContextAccessor HttpContextAccessor
 
 @{
 }
@@ -9,7 +10,7 @@
         <form method="POST" asp-action="UpdateProfile">
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Profiilin asetukset</h4>
+                    <h1 class="navbar-brand" style="color: #5e9693;">Profiilin asetukset</h1>
                 </div>
                 <div class="row mt-2">
                     <div class="col-md-6"><label class="labels">Etunimi</label><input name="firstName" type="text" class="form-control" placeholder="@Model.FirstName" value="@Model.FirstName"></div>
@@ -24,7 +25,8 @@
                 </div>
                 <div class="row mt-3">
                 </div>
-                <div class="mt-5 text-center"><button class="btn btn-secondary profile-button" type="submit button">Tallenna muutokset!</button></div>
+                <div class="mt-5 text-center"><button class="btn btn-secondary profile-button" type="submit button">Tallenna muutokset</button></div>
+                <div class="mt-5 text-center" style="color:red">@HttpContextAccessor.HttpContext.Session.GetString("UserValidator") </div>
             </div>
         </form>
     

@@ -71,7 +71,6 @@ namespace ShopDb.Controllers
                 Email = email
             };
             _context.Users.Add(user);
-            _context.SaveChanges();
             HttpContext.Session.SetInt32("userId", user.Id);
 
             Address address1 = new Address()
@@ -82,6 +81,11 @@ namespace ShopDb.Controllers
                 City = city
             };
             _context.Addresses.Add(address1);
+            if (!Models.Utils.UserValidator(user, HttpContext))
+            {
+                return View();
+            }
+
             _context.SaveChanges();
 
             return View();
@@ -235,6 +239,10 @@ namespace ShopDb.Controllers
             user.Addresses.FirstOrDefault().PostalCode = postalCode;
             user.Addresses.FirstOrDefault().City = city;
 
+            if (!Models.Utils.UserValidator(user, HttpContext))
+            {
+                return View("ProfilePage", user);
+            }
             _context.Update(user);
             _context.SaveChanges();
 

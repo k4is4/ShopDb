@@ -4,8 +4,9 @@
     ViewData["Title"] = "OrderDetails";
 }
 
-<h1>Tilauksen tiedot</h1>
+<div class="container-sm container rounded bg-white bg-semitransparent mt-5 mb-auto" style="padding: 2vw">
 
+    <h1 class="navbar-brand text-center" style="color: #5e9693;">Tilauksen tiedot</h1>
 
 <div class="text-center">
     <table class="table">
@@ -66,4 +67,7 @@
 }
     </tbody>
 </table>
-<a asp-action="OrderHistory">Takaisin tilauksiin</a>
+<div class="text-center">
+@Html.ActionLink("Takaisin tilauksiin", "OrderHistory", "User", null, new {@class="btn btn-secondary"})
+</div>
+            </div>
