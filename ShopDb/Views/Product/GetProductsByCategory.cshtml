@@ -3,66 +3,33 @@
 @{
     ViewData["Title"] = "GetProductsByCategory";
 }
-<div class="p-4 bg-light bg-semitransparent">
-<h1>Tuotevalikoima</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-               @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                Nimi
-            </th>
-            <th>
-                Tuotekuvaus
-            </th>
-            <th>
-                Tuoteryhmä
-            </th>
-            <th>
-                Nimi
-            </th>
-            <th>
-                Varastossa
-            </th>
-           @* <th>*@
-                
-                @*@Html.DisplayNameFor(model => model.PictureUrl)*@
-            @*</th>*@
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.PictureUrl)
-            </td>*@
-            <td>
-                <a asp-action="Details" asp-controller="Product" asp-route-id="@item.Id">Tuotteen tiedot</a> |
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-</div>
+<!--Section: All Products -->
+      <section class="text-center">
+        <h1 class="mb-5 navbar-brand" style="color: #5e9693; font-size: 4vw"><strong>@Model.First().Category.Name</strong></h1>
+
+        <div class="row">
+            @foreach (var item in Model)
+        {
+          <div class="col-lg-3 col-md-4 mb-4">
+            <div class="card">
+              <div class="p-4 bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                <img src="@(item.PictureUrl!=null ? item.PictureUrl : "https://mdbootstrap.com/img/new/standard/nature/184.jpg")" class="img-fluid" />
+                <a href="#!">
+                  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                </a>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">@item.Name</h5>
+                <p class="card-text">
+                  @item.Price €
+                </p>
+                <a href="/Product/Details/@item.Id" class="btn btn-secondary">Tuotteen tiedot</a>
+              </div>
+            </div>
+          </div>
+        }
+        </div>
+      </section>
+      <!--Section: All Products -->
+

@@ -3,12 +3,12 @@
 @{
     ViewData["Title"] = "Details";
 }
-
+<div class="p-4 bg-light bg-semitransparent">
 <h1>Tuotteen tiedot</h1>
-
-<div>
+<br />
     <h4>Tuote</h4>
     <hr />
+    <div class="p-4 bg-light bg-semitransparent">
     <dl class="row">
         <dt class = "col-sm-2">
             Nimi
@@ -47,8 +47,10 @@
             @Html.DisplayFor(model => model.Category.Id)
         </dd>
     </dl>
-</div>
+    @*</div>*@
+
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Muokkaa</a> |
-    <a asp-action="Index">Takaisin</a>
+    <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@Model?.Id">Muokkaa</a> 
+     <a class="btn btn-light" asp-action="Index">Takaisin</a>
+</div>
 </div>

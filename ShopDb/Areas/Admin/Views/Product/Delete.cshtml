@@ -4,12 +4,14 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Poista</h1>
-
+ <div class="p-4 bg-light bg-semitransparent">
 <h3>Haluatko varmasti poistaa tuotteen?</h3>
+
+<br />
 <div>
     <h4>Tuote</h4>
     <hr />
+   <div class="p-4 bg-light bg-semitransparent">
     <dl class="row">
         <dt class = "col-sm-2">
             Nimi
@@ -51,7 +53,8 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Poista" class="btn btn-danger" /> |
-        <a asp-action="Index">Takaisin</a>
+        <input type="submit" value="Poista" class="btn btn-danger" /> 
+         <a class="btn btn-light" asp-action="Index">Takaisin</a>
     </form>
+    </div>
 </div>

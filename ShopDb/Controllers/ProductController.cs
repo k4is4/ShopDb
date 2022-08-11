@@ -29,14 +29,14 @@ namespace ShopDb.Controllers
         // GET: Product
         public async Task<IActionResult> Index()
         {
-            var shopDbContext = _context.Product.Include(p => p.Category);
-            return View(await shopDbContext.ToListAsync());
+            var allProducts = _context.Product.Include(p => p.Category);
+            return View(await allProducts.ToListAsync());
         }
 
         public async Task<IActionResult> GetProductsByCategory(int id)
         {
-            var shopDbContext = _context.Product.Include(p => p.Category).Where(i => i.Category.Id == id);
-            return View(await shopDbContext.ToListAsync());
+            var products = _context.Product.Include(p => p.Category).Where(i => i.Category.Id == id);
+            return View(await products.ToListAsync());
         }
         [HttpPost]
         public async Task<IActionResult> GetProductsByName(string name)
