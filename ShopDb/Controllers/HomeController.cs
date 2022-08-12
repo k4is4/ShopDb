@@ -149,50 +149,50 @@ namespace ShopDb.Controllers
             return topProductsList.Take(quantity).ToList();
         }
 
-        public async Task<IActionResult> AddLike(int id)
-        {
-            var userId = HttpContext.Session.GetInt32("userId");
-            var like = new Like()
-            {
-                UserId = (int)userId,
-                ProductId = id
-            };
+        //public async Task<IActionResult> AddLike(int id)
+        //{
+        //    var userId = HttpContext.Session.GetInt32("userId");
+        //    var like = new Like()
+        //    {
+        //        UserId = (int)userId,
+        //        ProductId = id
+        //    };
 
-            _shopDb.Likes.Add(like);
-            _shopDb.SaveChanges();
+        //    _shopDb.Likes.Add(like);
+        //    _shopDb.SaveChanges();
 
-            var product = await _shopDb.Product
-                .Include(p => p.Category)
-                .FirstOrDefaultAsync(m => m.Id == id);
+        //    var product = await _shopDb.Product
+        //        .Include(p => p.Category)
+        //        .FirstOrDefaultAsync(m => m.Id == id);
 
-            if (product == null)
-            {
-                return NotFound();
-            }
+        //    if (product == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Redirect("/Product/Details/" + id + "/" + product.Name);
-        }
+        //    return Redirect("/Product/Details/" + id + "/" + product.Name);
+        //}
 
-        public async Task<IActionResult> RemoveLike(int id)
-        {
-            var userId = HttpContext.Session.GetInt32("userId");
-            var like = _shopDb.Likes.Where(a => a.UserId.Equals(userId) && a.ProductId.Equals(id))
-                .FirstOrDefault();
+        //public async Task<IActionResult> RemoveLike(int id)
+        //{
+        //    var userId = HttpContext.Session.GetInt32("userId");
+        //    var like = _shopDb.Likes.Where(a => a.UserId.Equals(userId) && a.ProductId.Equals(id))
+        //        .FirstOrDefault();
 
 
-            _shopDb.Likes.Remove(like);
-            _shopDb.SaveChanges();
+        //    _shopDb.Likes.Remove(like);
+        //    _shopDb.SaveChanges();
 
-            var product = await _shopDb.Product
-                .Include(p => p.Category)
-                .FirstOrDefaultAsync(m => m.Id == id);
+        //    var product = await _shopDb.Product
+        //        .Include(p => p.Category)
+        //        .FirstOrDefaultAsync(m => m.Id == id);
 
-            if (product == null)
-            {
-                return NotFound();
-            }
+        //    if (product == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Redirect("/Product/Details/" + id + "/" + product.Name);
-        }
+        //    return Redirect("/Product/Details/" + id + "/" + product.Name);
+        //}
     }
 }

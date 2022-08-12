@@ -148,5 +148,52 @@ namespace ShopDb.Controllers
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
         }
+
+
+        public async Task<IActionResult> AddLike(int id)
+        {
+            var userId = HttpContext.Session.GetInt32("userId");
+            var like = new Like()
+            {
+                UserId = (int)userId,
+                ProductId = id
+            };
+
+            _context.Likes.Add(like);
+            _context.SaveChanges();
+
+            var product = await _context.Product
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return Redirect("/Product/Details/" + id + "/" + product.Name);
+        }
+
+        public async Task<IActionResult> RemoveLike(int id)
+        {
+            var userId = HttpContext.Session.GetInt32("userId");
+            var like = _context.Likes.Where(a => a.UserId.Equals(userId) && a.ProductId.Equals(id))
+                .FirstOrDefault();
+
+
+            _context.Likes.Remove(like);
+            _context.SaveChanges();
+
+            var product = await _context.Product
+                .Include(p => p.Category)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return Redirect("/Product/Details/" + id + "/" + product.Name);
+        }
     }
 }
