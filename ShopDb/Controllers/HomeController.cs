@@ -118,18 +118,6 @@ namespace ShopDb.Controllers
 
             return View(cartRows);
         }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
         public List<Product> GetTopProducts(int quantity)
         {
             var topProductsDict = new Dictionary<int, int>();

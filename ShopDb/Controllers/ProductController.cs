@@ -20,7 +20,6 @@ namespace ShopDb.Controllers
             _shopDb = new ShopDbContext(optionsBuilder.Options);
         }
 
-        // GET: Product
         public async Task<IActionResult> Index()
         {
             ViewBag.Header = "Kaikki tuotteet";
@@ -52,7 +51,6 @@ namespace ShopDb.Controllers
             return View("Index", await shopDbContext.ToListAsync());
         }
 
-        // GET: Product/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Product == null)
