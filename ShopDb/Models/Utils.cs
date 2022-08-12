@@ -24,6 +24,11 @@
                 httpContext.Session.SetString("UserValidator", "Puhelinnumeron tulee olla vähintään 5 ja korkeintaan 15 merkkiä pitkä");
                 return false;
             }
+            if (user.Email.Length > 20)
+            {
+                httpContext.Session.SetString("UserValidator", "Sähköpostiosoitteen max pituus on 20 merkkiä.");
+                return false;
+            }
             if (!user.Email.Contains("@") || user.Email.EndsWith("."))
             {
                 httpContext.Session.SetString("UserValidator", "Tarkista sähköpostiosoitteen kirjoitusasu. Sähköpostin tulee sisältää '@' merkki");
