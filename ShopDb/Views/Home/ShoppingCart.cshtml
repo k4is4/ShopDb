@@ -41,7 +41,7 @@ else
                 </td>
                 <td>
                     @Html.ActionLink("Tuotteen tiedot", "Details", "Product", new {id = item.ProductId}, new {@class="btn btn-light"})
-                    @Html.ActionLink("Poista tuote korista", "DeleteFromCart", "Home", new {item.ProductId}, new {@class="btn btn-light"})
+                    @Html.ActionLink("Poista tuote korista", "DeleteFromCart", "Home", new {item.Id}, new {@class="btn btn-light"})
                 </td>
             </tr>
 }
