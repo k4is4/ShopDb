@@ -22,5 +22,7 @@ namespace ShopDb.Models
         public virtual Category? Category { get; set; }
         public virtual ICollection<OrderRow> OrderRows { get; set; }
         public virtual ICollection<ShoppingCartRow> ShoppingCartRows { get; set; }
+
+        public virtual Like? Like { get; set; }
     }
 }

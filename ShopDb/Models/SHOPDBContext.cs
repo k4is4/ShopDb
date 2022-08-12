@@ -24,6 +24,7 @@ namespace ShopDb.Models
         public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; } = null!;
         public virtual DbSet<ShoppingCartRow> ShoppingCartRows { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
+        public virtual DbSet<Like> Likes { get; set; } = null!;
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

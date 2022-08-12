@@ -56,13 +56,13 @@ body {
 }
 
 #tuotteentiedot {
-    max-width: 30%;
+    max-width: 20%;
     height: auto;
-    float: right;
+    float: left;
 }
 
 #admin-page-photo {
-    max-width: 30%;
+    max-width: 20%;
     height: auto;
     float: initial;
 }
@@ -83,4 +83,5 @@ body {
     padding-bottom: 1rem;
     flex: none;
 }
+
 
