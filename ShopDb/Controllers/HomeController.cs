@@ -41,6 +41,7 @@ namespace ShopDb.Controllers
             var userId = HttpContext.Session.GetInt32("userId");
             var cartId = _shopDb.ShoppingCarts.Where(c => c.UserId == userId).Select(c => c.Id).FirstOrDefault();
 
+            // Check if user already has an active ShoppingCart, else create new ShoppingCart
             if (cartId == 0)
             {
                 var cart = new ShoppingCart() { UserId = userId };
@@ -49,6 +50,7 @@ namespace ShopDb.Controllers
                 cartId = cart.Id;
             }
 
+            // Check if ShoppingCart already includes the product, else add new ShoppingCartRow for the product
             var cartRow = _shopDb.ShoppingCartRows.Where(r => r.ShoppingCartId == cartId && r.ProductId == id).FirstOrDefault();
 
             if (cartRow is null)
@@ -85,6 +87,7 @@ namespace ShopDb.Controllers
         public IActionResult ConfirmOrder(int id, decimal total)
         {
             var cart = _shopDb.ShoppingCarts.Where(c => c.Id == id).FirstOrDefault();
+
             var order = new Order()
             {
                 UserId = (int)HttpContext.Session.GetInt32("userId"),
@@ -97,6 +100,7 @@ namespace ShopDb.Controllers
 
             var cartRows = _shopDb.ShoppingCartRows.Include(c => c.Product).Where(x => x.ShoppingCartId == id).ToList();
 
+            // Create new OrderRow for each ShoppingCartRow and delete the whole cart after
             foreach (var item in cartRows)
             {
                 item.Product.Quantity -= item.Quantity;
@@ -123,6 +127,7 @@ namespace ShopDb.Controllers
             var topProductsDict = new Dictionary<int, int>();
             var topProductsList = new List<Product>();
 
+            // Count how many items of each product sold
             foreach (var item in _shopDb.OrderRows)
             {
                 if (!topProductsDict.ContainsKey(item.ProductId))
