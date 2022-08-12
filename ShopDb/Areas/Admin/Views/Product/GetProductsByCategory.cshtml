@@ -34,7 +34,7 @@
                 Varastossa
             </th>
            <th>
-                Kuvan url
+                Kuva
             </th>
             <th></th>
         </tr>
@@ -61,7 +61,7 @@
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PictureUrl)
+                <img src="@(item.PictureUrl !=null ? item.PictureUrl :"https://mdbootstrap.com/img/new/standard/nature/184.jpg")" alt="..." id="admin-page-photo">
             </td>
             <td>
                  <a class="btn btn-outline-secondary btn-sm" asp-action="Edit" asp-route-id="@item.Id">Muokkaa</a> 
